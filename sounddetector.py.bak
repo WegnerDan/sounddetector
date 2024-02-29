@@ -4,8 +4,6 @@
 #
 # this entire thing stolen from  Sufficiently-Advanced (Allen Pan)
 #
-from __future__ import absolute_import
-from __future__ import print_function
 import pyaudio
 from numpy import zeros,linspace,short,fromstring,hstack,transpose,log
 from scipy import fft
@@ -18,7 +16,6 @@ import time
 import sys
 import signal
 from secrets import mqtthost, mqttuser, mqttpass
-# from six.moves import range
 
 def terminateProcess(signalNumber, frame):
     client.publish("sounddetector/state", "offline")
@@ -66,7 +63,7 @@ if debug:
     numdevices = info.get('deviceCount')
     for i in range(0, numdevices):
         if (pd.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-            print("Input Device id ", i, " - ", pd.get_device_info_by_host_api_device_index(0, i).get('name'))
+            print "Input Device id ", i, " - ", pd.get_device_info_by_host_api_device_index(0, i).get('name')
 
 # Alarm frequencies (Hz) to detect (Use audacity to record a wave and then do Analyze->Plot Spectrum)
 D1 = 530
@@ -143,36 +140,36 @@ while True:
           else:
             freqNow = which*SAMPLING_RATE/NUM_SAMPLES
 
-        if debug: print("\t\t\t\tfreq=",freqNow,"\t",freqPast)
-        if debug: print("\t\t\t\tnotes=",notes)
+        if debug: print "\t\t\t\tfreq=",freqNow,"\t",freqPast
+        if debug: print "\t\t\t\tnotes=",notes
 
         if max(intensity[(frequencies < maxD5+BANDWIDTH) & (frequencies > minD1-BANDWIDTH )]) > max(intensity[(frequencies < maxD5-1000) & (frequencies > minD1-2000)]) + SENSITIVITY:
           blipcount+=1
           resetcount=0
-          if debug: print("\t\tBlip",blipcount)
+          if debug: print "\t\tBlip",blipcount
           if (blipcount>=beeplength):
             blipcount=0
             resetcount=0
             beepcount+=1
-            if debug: print("\tBeep",beepcount,freqNow)
+            if debug: print "\tBeep",beepcount,freqNow
             if (beepcount>=tonelength):
                 clearcount=0
                 tone=True
-                if debug: print("ToneDetected")
+                if debug: print "ToneDetected"
                 beepcount=0
         else:
             blipcount=0
             resetcount+=1
-            if debug: print("\t\t\treset",resetcount)
+            if debug: print "\t\t\treset",resetcount
             if (resetcount>=resetlength):
                 resetcount=0
                 beepcount=0
                 if tone:
                     clearcount+=1
-                    if debug: print("\t\tclear",clearcount)
+                    if debug: print "\t\tclear",clearcount
                     if clearcount>=clearlength:
                         clearcount=0
-                        if debug: print("Tone Too Short - Cleared")
+                        if debug: print "Tone Too Short - Cleared"
                         tone=False
 
 #        if minD1 <= freqPast <= maxD5 and abs(freqNow-freqPast) <= 20:
@@ -181,24 +178,24 @@ while True:
             notes.append('F')
          elif freqPast <= maxD1 and minD1 <= freqNow <= maxD1 and notes[-1]!='D1':
             notes.append('D1')
-            if debug: print("You played D1!")
+            if debug: print "You played D1!"
          elif minD5 <= freqPast <= maxD5 and minD5 <= freqNow <= maxD5 and notes[-1]!='D5':
             notes.append('D5')
          elif minD2<=freqPast<=maxD2 and minD2<=freqNow<=maxD2 and notes[-1]!='D2':
             notes.append('D2')
-            if debug: print("You played D2!")
+            if debug: print "You played D2!"
          elif minG<=freqPast<=maxG and minG<=freqNow<=maxG and notes[-1]!='G':
             notes.append('G')
-            if debug: print("You played G!")
+            if debug: print "You played G!"
 
         if notes==doorbell:
-          if debug: print("\t\t\t\tDoorbell song!")
+          if debug: print "\t\t\t\tDoorbell song!"
           now = datetime.datetime.now()
           ringtime="{\"datetime\":\"" + now.strftime("%Y-%m-%d %H:%M:%S") + "\"}"
           client.publish("sounddetector/doorbell", ringtime)
           notes.append('G')#append with 'G' to 'reset' notes, this keeps the song from triggering constantly
         if notes==test:
-          if debug: print("Test Sequence Activated!")
+          if debug: print "Test Sequence Activated!"
           client.publish("sounddetector", "test") 
           notes.append('G')
 
