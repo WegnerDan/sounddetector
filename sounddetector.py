@@ -37,19 +37,22 @@ client.connect(mqtthost,1883,300)
 #             0.1: Probably Ideal volume
 #             1: Poorly sensitive, will only go off for relatively loud
 SENSITIVITY= 1.0
+# set debug=True to find out which number correspons to which mic
+MICROPHONE_DEVICE_INDEX=2
 
 #Bandwidth for detection (i.e., detect frequencies within this margin of error of the TONE)
 BANDWIDTH = 20
 #How many 46ms blips before we declare a beep? (Take the beep length in ms, divide by 46ms, subtract a bit)
-beeplength=8
+# 0.5 seconds = 500ms/8 = 10,8695652174
+beeplength=10
 # How many beeps before we declare a tone?
-tonelength=2
+tonelength=5
 # How many false 46ms blips before we declare the alarm is not ringing
-resetlength=6
+resetlength=12
 # How many reset counts until we clear an active alarm?
 clearlength=2
 # Enable blip, beep, and reset debug output
-debug=False
+debug=True
 # Show the most intense frequency detected (useful for configuration)
 frequencyoutput=True
 
@@ -73,7 +76,7 @@ D1 = 530
 D2 = 675
 F = 755
 G = 806
-D5 = 1175
+D5 = 4000
 #frequency ranges for each note
 '''rangeD1 = range(D1-BANDWIDTH,D4+BANDWIDTH)
 rangeD2 = range(D2-BANDWIDTH,D2+BANDWIDTH)
@@ -110,6 +113,7 @@ pa = pyaudio.PyAudio()
 _stream = pa.open(format=pyaudio.paInt16,
                   channels=1, rate=SAMPLING_RATE,
                   input=True,
+                  input_device_index=MICROPHONE_DEVICE_INDEX,
                   frames_per_buffer=NUM_SAMPLES)
 
 if debug: print("Alarm detector working. Press CTRL-C to quit.")
