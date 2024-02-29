@@ -2,6 +2,8 @@
 
 This is a python script that is used to detect a sequence of specific sounds (notes) and report the event via mqtt.  I use this to listen for the unique (hopefully) sound of my doorbell, and notify my Home Assistant that the doorbell is ringing.  The supporting files are used to tie these pieces together and do something when the doorbell rings.
 
+I'm trying to adapt this fork to detect a specific beep pattern of a [reishunger rice cooker](https://www.reishunger.de/produkt/1376/digitaler-reiskocher), because I am lazy and want to be notified when it has finished cooking. The rice cooker emits five beeps at 4000Hz (500ms beep, 500ms silence x5).
+
 ## Getting Started
 
 The meat of this is in the sounddetector.py script.  This was stolen from the work of Allen Pan (https://www.raspberrypi.org/blog/zelda-home-automation/) which used Benjamin Chodroff's underlying sound detection to do similar work (https://benchodroff.com/2017/02/18/using-a-raspberry-pi-with-a-microphone-to-hear-an-audio-alarm-using-fft-in-python/) to detect a water alarm.  This also uses Chec_603's mqtt bash execution script (https://unix.stackexchange.com/questions/188525/how-to-subscribe-a-bash-script-as-a-mqtt-client) to control the process.
