@@ -216,52 +216,10 @@ while True:
 
         #        if minD1 <= freqPast <= maxD5 and abs(freqNow-freqPast) <= 20:
         if tone:
-            if (
-                minF <= freqPast <= maxF
-                and minF <= freqNow <= maxF
-                and notes[-1] != "F"
-            ):
-                notes.append("F")
-            elif freqPast <= maxD1 and minD1 <= freqNow <= maxD1 and notes[-1] != "D1":
-                notes.append("D1")
-                if debug:
-                    print("You played D1!")
-            elif (
-                minD5 <= freqPast <= maxD5
-                and minD5 <= freqNow <= maxD5
-                and notes[-1] != "D5"
-            ):
-                notes.append("D5")
-            elif (
-                minD2 <= freqPast <= maxD2
-                and minD2 <= freqNow <= maxD2
-                and notes[-1] != "D2"
-            ):
-                notes.append("D2")
-                if debug:
-                    print("You played D2!")
-            elif (
-                minG <= freqPast <= maxG
-                and minG <= freqNow <= maxG
-                and notes[-1] != "G"
-            ):
-                notes.append("G")
-                if debug:
-                    print("You played G!")
-
-        if notes == doorbell:
             if debug:
-                print("\t\t\t\tDoorbell song!")
+                print("\t\t\t\tRicecooker done!")
             now = datetime.datetime.now()
-            ringtime = '{"datetime":"' + now.strftime("%Y-%m-%d %H:%M:%S") + '"}'
-            client.publish("sounddetector/doorbell", ringtime)
-            notes.append(
-                "G"
-            )  # append with 'G' to 'reset' notes, this keeps the song from triggering constantly
-        if notes == test:
-            if debug:
-                print("Test Sequence Activated!")
-            client.publish("sounddetector", "test")
-            notes.append("G")
+            ricecooker_finish_time = '{"datetime":"' + now.strftime("%Y-%m-%d %H:%M:%S") + '"}'
+            client.publish("sounddetector/ricecooker_finish_time", ricecooker_finish_time)
 
     client.publish("sounddetector/state", "online")
