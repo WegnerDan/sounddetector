@@ -8,7 +8,7 @@
 #from __future__ import print_function
 import pyaudio
 from numpy import zeros,linspace,short,fromstring,hstack,transpose,log
-from scipy import fft
+from scipy.fft import fft
 from time import sleep
 from collections import deque
 import paho.mqtt.client as mqtt
@@ -129,8 +129,8 @@ while True:
             _stream.get_read_available()), dtype=short)[-NUM_SAMPLES:]
         # Each data point is a signed 16 bit number, so we can normalize by dividing 32*1024
         normalized_data = audio_data / 32768.0
-        intensity = abs(fft(normalized_data))[:NUM_SAMPLES/2]
-        frequencies = linspace(0.0, float(SAMPLING_RATE)/2, num=NUM_SAMPLES/2)
+        intensity = abs(fft(normalized_data))[:NUM_SAMPLES//2]
+        frequencies = linspace(0.0, float(SAMPLING_RATE)//2, num=NUM_SAMPLES//2)
         if frequencyoutput:
           which = intensity[1:].argmax()+1
           # use quadratic interpolation around the max
