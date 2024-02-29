@@ -4,8 +4,8 @@
 #
 # this entire thing stolen from  Sufficiently-Advanced (Allen Pan)
 #
-from __future__ import absolute_import
-from __future__ import print_function
+#from __future__ import absolute_import
+#from __future__ import print_function
 import pyaudio
 from numpy import zeros,linspace,short,fromstring,hstack,transpose,log
 from scipy import fft
@@ -17,7 +17,7 @@ import datetime
 import time
 import sys
 import signal
-from secrets import mqtthost, mqttuser, mqttpass
+from mqtt_auth import mqtthost, mqttuser, mqttpass
 # from six.moves import range
 
 def terminateProcess(signalNumber, frame):
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGTERM, terminateProcess)
 
 #mqtt stuff
-client = mqtt.Client(client_id="sounddetector")
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,client_id="sounddetector")
 client.username_pw_set(username=mqttuser,password=mqttpass)
 client.connect(mqtthost,1883,300)
 
