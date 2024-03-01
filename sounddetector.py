@@ -12,7 +12,6 @@ from scipy.fft import fft
 from time import sleep
 from collections import deque
 import paho.mqtt.client as mqtt
-import requests
 import datetime
 import time
 import sys
