@@ -130,7 +130,7 @@ _stream = pa.open(
 
 if debug:
     print("Alarm detector working. Press CTRL-C to quit.")
-client.publish("sounddetector/state", "online")
+client.publish("sounddetector/state", "starting")
 
 while True:
     timeout = 30  # report in to mqtt every 30 seconds
