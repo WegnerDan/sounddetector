@@ -31,7 +31,13 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, terminateProcess)
 
 # mqtt stuff
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id="sounddetector")
+if hasattr(mqtt, "CallbackAPIVersion"):
+    # paho version 2 or greater
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id="sounddetector")
+else:
+    # paho version below 2
+    client = mqtt.Client(client_id="sounddetector")
+
 client.username_pw_set(username=mqttuser, password=mqttpass)
 client.connect(mqtthost, 1883, 300)
 
@@ -218,7 +224,11 @@ while True:
             if debug:
                 print("\t\t\t\tRicecooker done!")
             now = datetime.datetime.now()
-            ricecooker_finish_time = '{"datetime":"' + now.strftime("%Y-%m-%d %H:%M:%S") + '"}'
-            client.publish("sounddetector/ricecooker_finish_time", ricecooker_finish_time)
+            ricecooker_finish_time = (
+                '{"datetime":"' + now.strftime("%Y-%m-%d %H:%M:%S") + '"}'
+            )
+            client.publish(
+                "sounddetector/ricecooker_finish_time", ricecooker_finish_time
+            )
 
     client.publish("sounddetector/state", "online")
