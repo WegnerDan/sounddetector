@@ -1,18 +1,16 @@
-switch:
-  - platform: mqtt
-    name: "Sound Detector"
-    command_topic: "sounddetector/cmds"
-    state_topic: "sounddetector/state"
-    payload_on: "systemctl start sounddetector"
-    payload_off: "systemctl stop sounddetector"
-    state_off: "offline"
-    state_on: "online"
-    icon: mdi:music-note
-
-sensor:
-  - platform: mqtt
-    name: "Doorbell Detector"
-    state_topic: "sounddetector/doorbell"
-    value_template: "{{ value_json.datetime }}"
+mqtt:
+  switch:
+    - name: "Rice Cooker Sound Detector"
+      command_topic: "sounddetector/cmds"
+      state_topic: "sounddetector/state"
+      payload_on: "systemctl start sounddetector"
+      payload_off: "systemctl stop sounddetector"
+      state_off: "offline"
+      state_on: "online"
+      icon: mdi:rice
+  sensor:
+    - name: "Ricecooker Finish Time"
+      state_topic: "sounddetector/ricecooker_finish_time"
+      value_template: "{{ value_json.datetime }}"
 
 

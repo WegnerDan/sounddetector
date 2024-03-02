@@ -37,7 +37,6 @@ if hasattr(mqtt, "CallbackAPIVersion"):
 else:
     # paho version below 2
     client = mqtt.Client(client_id="sounddetector")
-
 client.username_pw_set(username=mqttuser, password=mqttpass)
 client.connect(mqtthost, 1883, 300)
 
