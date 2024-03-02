@@ -149,7 +149,8 @@ while True:
         while _stream.get_read_available() < NUM_SAMPLES:
             sleep(0.05)
         audio_data = fromstring(
-            _stream.read(_stream.get_read_available()), dtype=short
+            _stream.read(_stream.get_read_available(), exception_on_overflow=False),
+            dtype=short,
         )[-NUM_SAMPLES:]
         # Each data point is a signed 16 bit number, so we can normalize by dividing 32*1024
         normalized_data = audio_data / 32768.0
