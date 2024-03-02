@@ -4,8 +4,8 @@ After=networking.service
 [Service]
 User=thedoginthewok
 Group=thedoginthewok
-WorkingDirectory=/home/thedoginthewok/home/sounddetector
-ExecStart=/home/thedoginthewok/home/sounddetector/sounddetector.py
+WorkingDirectory=/home/thedoginthewok/sounddetector
+ExecStart=/home/thedoginthewok/sounddetector/sounddetector.py
 
 [Install]
 WantedBy=default.target
