@@ -2,6 +2,7 @@
 After=networking.service
 
 [Service]
+Type=forking
 WorkingDirectory=/home/thedoginthewok/sounddetector
 ExecStart=/home/thedoginthewok/sounddetector/sounddetectorlistener.sh 2>/dev/null
 
