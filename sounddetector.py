@@ -156,7 +156,7 @@ while True:
         try:
             intensity = abs(fft(normalized_data))[: NUM_SAMPLES // 2]
         except ValueError:
-            pass
+            continue
         frequencies = linspace(0.0, float(SAMPLING_RATE) // 2, num=NUM_SAMPLES // 2)
         if frequencyoutput:
             which = intensity[1:].argmax() + 1
