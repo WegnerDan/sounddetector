@@ -59,7 +59,7 @@ resetlength = 12
 # How many reset counts until we clear an active alarm?
 clearlength = 2
 # Enable blip, beep, and reset debug output
-debug = True
+debug = False
 # Show the most intense frequency detected (useful for configuration)
 frequencyoutput = False
 
