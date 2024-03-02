@@ -120,7 +120,7 @@ freqPast = 1.0
 
 # Set up audio sampler -
 NUM_SAMPLES = 2048
-SAMPLING_RATE = 44100  # make sure this matches the sampling rate of your mic!
+SAMPLING_RATE = 48000  # make sure this matches the sampling rate of your mic!
 pa = pyaudio.PyAudio()
 _stream = pa.open(
     format=pyaudio.paInt16,
