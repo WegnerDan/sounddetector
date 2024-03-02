@@ -2,10 +2,10 @@
 After=networking.service
 
 [Service]
-User=kbowman
-Group=kbowman
-WorkingDirectory=/home/kbowman/home/sounddetector
-ExecStart=/home/kbowman/home/sounddetector/sounddetector.py
+User=thedoginthewok
+Group=thedoginthewok
+WorkingDirectory=/home/thedoginthewok/home/sounddetector
+ExecStart=/home/thedoginthewok/home/sounddetector/sounddetector.py
 
 [Install]
 WantedBy=default.target
