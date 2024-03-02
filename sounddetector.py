@@ -61,7 +61,7 @@ clearlength = 2
 # Enable blip, beep, and reset debug output
 debug = True
 # Show the most intense frequency detected (useful for configuration)
-frequencyoutput = True
+frequencyoutput = False
 
 blipcount = 0
 beepcount = 0
@@ -115,8 +115,6 @@ test = deque(["D2", "F"])
 # heard note sequence deque
 notes = deque(["G", "G"], maxlen=2)
 
-# Show the most intense frequency detected (useful for configuration)
-frequencyoutput = True
 freqNow = 1.0
 freqPast = 1.0
 
@@ -154,7 +152,10 @@ while True:
         )[-NUM_SAMPLES:]
         # Each data point is a signed 16 bit number, so we can normalize by dividing 32*1024
         normalized_data = audio_data / 32768.0
-        intensity = abs(fft(normalized_data))[: NUM_SAMPLES // 2]
+        try:
+            intensity = abs(fft(normalized_data))[: NUM_SAMPLES // 2]
+        except ValueError:
+            pass
         frequencies = linspace(0.0, float(SAMPLING_RATE) // 2, num=NUM_SAMPLES // 2)
         if frequencyoutput:
             which = intensity[1:].argmax() + 1
