@@ -11,6 +11,7 @@ mqtt:
   sensor:
     - name: "Ricecooker Finish Time"
       state_topic: "sounddetector/ricecooker_finish_time"
+      device_class: "timestamp"
       value_template: "{{ value_json.datetime }}"
 
 

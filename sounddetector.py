@@ -222,10 +222,13 @@ while True:
         if tone:
             if debug:
                 print("\t\t\t\tRicecooker done!")
-            now = datetime.datetime.now()
+            ricecooker_finish_time = datetime.datetime.now(
+                datetime.timezone.utc
+            ) + datetime.timedelta(seconds=10)
             ricecooker_finish_time = (
-                '{"datetime":"' + now.strftime("%Y-%m-%d %H:%M:%S") + '"}'
+                '{"datetime":"' + ricecooker_finish_time.astimezone().isoformat() + '"}'
             )
+
             client.publish(
                 "sounddetector/ricecooker_finish_time", ricecooker_finish_time
             )
