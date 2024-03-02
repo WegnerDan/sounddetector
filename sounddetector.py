@@ -152,7 +152,7 @@ while True:
         )[-NUM_SAMPLES:]
         # Each data point is a signed 16 bit number, so we can normalize by dividing 32*1024
         normalized_data = audio_data / 32768.0
-        intensity = None
+        intensity = 0, 0
         try:
             intensity = abs(fft(normalized_data))[: NUM_SAMPLES // 2]
         except ValueError:
