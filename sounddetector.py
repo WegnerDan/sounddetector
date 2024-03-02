@@ -43,7 +43,7 @@ client.connect(mqtthost, 1883, 300)
 # Volume Sensitivity, 0.05: Extremely Sensitive, may give false alarms
 #             0.1: Probably Ideal volume
 #             1: Poorly sensitive, will only go off for relatively loud
-SENSITIVITY = 1.0
+SENSITIVITY = 0.1
 # set debug=True to find out which number correspons to which mic
 MICROPHONE_DEVICE_INDEX = 0
 
@@ -51,7 +51,7 @@ MICROPHONE_DEVICE_INDEX = 0
 BANDWIDTH = 20
 # How many 46ms blips before we declare a beep? (Take the beep length in ms, divide by 46ms, subtract a bit)
 # 0.5 seconds = 500ms/8 = 10,8695652174
-beeplength = 10
+beeplength = 8
 # How many beeps before we declare a tone?
 tonelength = 5
 # How many false 46ms blips before we declare the alarm is not ringing
