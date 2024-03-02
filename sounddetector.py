@@ -145,7 +145,7 @@ while True:
         test -= 1
 
         while _stream.get_read_available() < NUM_SAMPLES:
-            sleep(0.05)
+            sleep(0.1)
         audio_data = fromstring(
             _stream.read(_stream.get_read_available(), exception_on_overflow=False),
             dtype=short,
