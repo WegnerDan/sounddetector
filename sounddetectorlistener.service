@@ -2,8 +2,8 @@
 After=networking.service
 
 [Service]
-WorkingDirectory=/home/kbowman/home/sounddetector
-ExecStart=/home/kbowman/home/sounddetector/sounddetectorlistener.sh 2>/dev/null
+WorkingDirectory=/home/thedoginthewok/home/sounddetector
+ExecStart=/home/thedoginthewok/home/sounddetector/sounddetectorlistener.sh 2>/dev/null
 
 [Install]
 WantedBy=default.target
