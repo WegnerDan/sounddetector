@@ -45,7 +45,7 @@ client.connect(mqtthost, 1883, 300)
 #             1: Poorly sensitive, will only go off for relatively loud
 SENSITIVITY = 1.0
 # set debug=True to find out which number correspons to which mic
-MICROPHONE_DEVICE_INDEX = 2
+MICROPHONE_DEVICE_INDEX = 0
 
 # Bandwidth for detection (i.e., detect frequencies within this margin of error of the TONE)
 BANDWIDTH = 20
@@ -122,7 +122,7 @@ freqPast = 1.0
 
 # Set up audio sampler -
 NUM_SAMPLES = 2048
-SAMPLING_RATE = 48000  # make sure this matches the sampling rate of your mic!
+SAMPLING_RATE = 44100  # make sure this matches the sampling rate of your mic!
 pa = pyaudio.PyAudio()
 _stream = pa.open(
     format=pyaudio.paInt16,
