@@ -51,7 +51,7 @@ MICROPHONE_DEVICE_INDEX = 0
 BANDWIDTH = 20
 # How many 46ms blips before we declare a beep? (Take the beep length in ms, divide by 46ms, subtract a bit)
 # 0.5 seconds = 500ms/8 = 10,8695652174
-beeplength = 8
+beeplength = 6
 # How many beeps before we declare a tone?
 tonelength = 5
 # How many false 46ms blips before we declare the alarm is not ringing
