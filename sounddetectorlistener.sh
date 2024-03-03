@@ -4,9 +4,9 @@
 # stolen from Chev_603 (darkerego) here:
 # https://unix.stackexchange.com/questions/188525/how-to-subscribe-a-bash-script-as-a-mqtt-client/274224#274224
 
-host=`grep mqtthost ./mqtt_auth.py | awk '{{gsub("\047","",$3)}; print $3}'`
-user=`grep mqttuser ./mqtt_auth.py | awk '{{gsub("\047","",$3)}; print $3}'`
-pass=`grep mqttpass ./mqtt_auth.py | awk '{{gsub("\047","",$3)}; print $3}'`
+host=$(grep mqtthost ./mqtt_auth.py | awk '{{gsub(/[\047\042]/,"",$3)}; print $3}')
+user=$(grep mqttuser ./mqtt_auth.py | awk '{{gsub(/[\047\042]/,"",$3)}; print $3}')
+pass=$(grep mqttpass ./mqtt_auth.py | awk '{{gsub(/[\047\042]/,"",$3)}; print $3}')
 
 
 clean="out cmds";p="backpipe";pid=$(cat pidfile)
