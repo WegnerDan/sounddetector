@@ -1,5 +1,6 @@
 [Unit]
-After=networking.service
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 WorkingDirectory=/home/thedoginthewok/sounddetector
